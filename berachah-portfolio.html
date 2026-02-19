@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berachah Global Concepts - Educational IT Solutions</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .animated-bg span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 25s infinite;
+            bottom: -150px;
+        }
+        
+        .animated-bg span:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+        
+        .animated-bg span:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+        
+        .animated-bg span:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+        
+        .animated-bg span:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+        
+        .animated-bg span:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+        
+        .animated-bg span:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+        
+        .animated-bg span:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+        
+        .animated-bg span:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+        
+        .animated-bg span:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+        
+        .animated-bg span:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #333;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+        
+        .hero-image {
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+        
+        .hero-image img {
+            max-width: 800px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #667eea;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        /* .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            border: 3px solid #667eea;
+            border-radius: 20px;
+            z-index: -1;
+        } */
+        
+        .about-text h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .about-text h4 {
+            color: #764ba2;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-box h4 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .stat-box p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+        
+        /* Services Section */
+        #services {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.4s;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .service-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* Portfolio Section */
+        #portfolio {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        #portfolio .section-title {
+            color: white;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+        }
+        
+        .portfolio-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .portfolio-content {
+            padding: 2rem;
+            color: #333;
+        }
+        
+        .portfolio-content h3 {
+            color: #667eea;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+        
+        .portfolio-content p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Booking Section */
+        #booking {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .booking-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+        
+        .submit-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 20px 1rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-close {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-close:hover {
+            color: #333;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .success-message.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Berachah Global Concepts</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#booking">Book Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="animated-bg">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container hero-content">
+            <h1>Educational IT Solutions for Schools</h1>
+            <p>Building innovative websites and applications that transform education</p>
+            <button class="cta-button" onclick="scrollToSection('booking')">Get Started</button>
+            <div class="hero-image">
+                <img src="images/hero-education.jpg" alt="Students learning with technology" onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop'">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="./my profile image.jpg" alt="Oluwaseun Oguntimehin - Frontend Developer" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22700%22%3E%3Crect fill=%22%23667eea%22 width=%22600%22 height=%22700%22/%3E%3Ctext fill=%22white%22 font-family=%22Arial%22 font-size=%2240%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EOluwaseun%3C/text%3E%3Ctext fill=%22white%22 font-family=%22Arial%22 font-size=%2240%22 x=%2250%25%22 y=%2260%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EOguntimehin%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div class="about-text">
+                    <h3>Oluwaseun Oguntimehin</h3>
+                    <h4>Frontend Developer & Coding Educator</h4>
+                    <p>With 7 years of experience in web development, I specialize in creating innovative IT solutions for educational institutions. My passion lies in building user-friendly applications that enhance the learning experience and teaching young minds the art of programming.</p>
+                    <p>At Berachah Global Concepts, we provide comprehensive IT support to schools, develop custom educational websites, and create applications that make education more accessible and engaging.</p>
+                    <div class="stats">
+                        <div class="stat-box">
+                            <h4>7+</h4>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>10+</h4>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>20+</h4>
+                            <p>Schools Served</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>96%</h4>
+                            <p>Client Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>School Website Development</h3>
+                    <p>Custom-designed, responsive websites that showcase your school's identity and engage with parents and students effectively.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Educational Applications</h3>
+                    <p>Interactive learning platforms, student management systems, and educational tools tailored to your institution's needs.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>IT Support & Maintenance</h3>
+                    <p>Comprehensive technical support, system updates, and ongoing maintenance to keep your digital infrastructure running smoothly.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Coding Education</h3>
+                    <p>Teaching programming fundamentals to young learners, preparing them for the digital future with hands-on coding lessons.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>School Management Systems</h3>
+                    <p>Complete solutions for attendance tracking, grade management, and administrative tasks to streamline school operations.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>E-Learning Platforms</h3>
+                    <p>Online learning environments with course management, assessments, and interactive content delivery systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Projects</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" onclick="openModal('cbt-system')">
+                    <div class="portfolio-image">
+                        <img src="images/cbt-system.png" alt="CBT System" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;font-size:1.8rem;font-weight:700;flex-direction:column;\'><div style=\'font-size:4rem;margin-bottom:1rem;\'>📝</div><div>CBT System</div></div>'">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Computer-Based Testing System</h3>
+                        <p>Complete exam management system with admin, teacher, and student portals. Features include question banks, automated grading, and real-time results.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">HTML/CSS/JS</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Real-time</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal('school-accounting')">
+                    <div class="portfolio-image">
+                        <img src="images/accounting-system.png" alt="Accounting System" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;font-size:1.8rem;font-weight:700;flex-direction:column;\'><div style=\'font-size:4rem;margin-bottom:1rem;\'>💰</div><div>Accounting System</div></div>'">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>School Accounting System</h3>
+                        <p>Transform your school's fee management from chaos to clarity in 30 minutes. Automated fee tracking, parent portal, and professional reports. Save 20+ hours per week!</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Google Sheets</span>
+                            <span class="tag">Parent Portal</span>
+                            <span class="tag">Cloud-Based</span>
+                            <span class="tag">₦50k - ₦500k</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal('ecommerce')">
+                    <div class="portfolio-image">
+                        <img src="images/ecommerce.png" alt="E-Commerce" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;font-size:1.8rem;font-weight:700;flex-direction:column;\'><div style=\'font-size:4rem;margin-bottom:1rem;\'>🛒</div><div>E-Commerce Store</div></div>'">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>School Supplies Store</h3>
+                        <p>Online marketplace for school supplies with shopping cart, payment integration, and order management.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">HTML/CSS/JS</span>
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal('school-website')">
+                    <div class="portfolio-image">
+                        <img src="images/school-portal.png" alt="School Portal" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;font-size:1.8rem;font-weight:700;flex-direction:column;\'><div style=\'font-size:4rem;margin-bottom:1rem;\'>🏫</div><div>School Portal</div></div>'">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>School Information Portal</h3>
+                        <p>Comprehensive school website with news, events, gallery, and parent communication features.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Responsive</span>
+                            <span class="tag">CMS</span>
+                            <span class="tag">Modern UI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal('lms')">
+                    <div class="portfolio-image">
+                        <img src="images/lms-platform.png" alt="LMS Platform" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;font-size:1.8rem;font-weight:700;flex-direction:column;\'><div style=\'font-size:4rem;margin-bottom:1rem;\'>📚</div><div>LMS Platform</div></div>'">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Learning Management System</h3>
+                        <p>Full-featured LMS with course creation, student enrollment, progress tracking, and certification.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">E-Learning</span>
+                            <span class="tag">Interactive</span>
+                            <span class="tag">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" onclick="openModal('attendance')">
+                    <div class="portfolio-image">
+                        <img src="images/attendance-system.png" alt="Attendance System" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;font-size:1.8rem;font-weight:700;flex-direction:column;\'><div style=\'font-size:4rem;margin-bottom:1rem;\'>✅</div><div>Attendance Tracker</div></div>'">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Smart Attendance Tracker</h3>
+                        <p>Automated attendance system with QR code scanning, real-time notifications, and detailed reports.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">QR Code</span>
+                            <span class="tag">Real-time</span>
+                            <span class="tag">Mobile-friendly</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking">
+        <div class="container">
+            <h2 class="section-title">Book a Service</h2>
+            <div class="booking-form">
+                <div id="success-message" class="success-message">
+                    Thank you! Your booking request has been received. We'll contact you within 24 hours.
+                </div>
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" name="phone" required placeholder="+234 XXX XXX XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>School/Organization Name *</label>
+                        <input type="text" name="organization" required placeholder="Enter school or organization name">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Required *</label>
+                        <select name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="website">School Website Development</option>
+                            <option value="application">Educational Application</option>
+                            <option value="support">IT Support & Maintenance</option>
+                            <option value="coding">Coding Education Program</option>
+                            <option value="management">School Management System</option>
+                            <option value="elearning">E-Learning Platform</option>
+                            <option value="other">Other (Please specify in message)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Project Details *</label>
+                        <textarea name="message" required placeholder="Tell us about your project requirements, timeline, and any specific features you need..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit Booking Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Berachah Global Concepts</h3>
+                <p>Transforming education through innovative IT solutions.</p>
+                <p>Building the future, one school at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#booking">Book Now</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: berachahglobalconcept@gmail.com</p>
+                <p>Phone: +23408039524688</p>
+                <p>Location: Nigeria</p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <p>Website Development</p>
+                <p>Educational Apps</p>
+                <p>IT Support</p>
+                <p>Coding Education</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Berachah Global Concepts. All rights reserved. | Developed by Oluwaseun Oguntimehin</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            var nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Google Apps Script URL - REPLACE WITH YOUR DEPLOYMENT URL
+        var scriptURL = 'https://script.google.com/macros/s/AKfycbxCcIz7HGYdl1y2P-ssiJDz2orgd_kp4MbootqaYEz2xRWNR--o6WYeSIiXIGtf_W9EIA/exec';
+        
+        // Form submission
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var submitButton = this.querySelector('.submit-button');
+            var originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            // Get form data
+            var formData = new FormData(this);
+            var data = {
+                action: 'addBooking',
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                organization: formData.get('organization'),
+                service: formData.get('service'),
+                message: formData.get('message'),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Send to Google Sheets
+            fetch(scriptURL + '?' + new URLSearchParams(data))
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(result) {
+                    console.log('Booking submitted:', result);
+                    
+                    // Show success message
+                    document.getElementById('success-message').classList.add('active');
+                    
+                    // Reset form
+                    document.getElementById('booking-form').reset();
+                    
+                    // Reset button
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(function() {
+                        document.getElementById('success-message').classList.remove('active');
+                    }, 5000);
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                    alert('There was an error submitting your booking. Please try again or contact us directly at berachahglobalconcept@gmail.com');
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
+        });
+
+        // Modal functions
+        var projectDetails = {
+            'cbt-system': {
+                title: 'Computer-Based Testing System',
+                description: 'A comprehensive exam management system designed for schools to conduct computer-based tests efficiently.',
+                features: [
+                    'Admin panel for system management',
+                    'Teacher portal for question creation',
+                    'Student portal for taking exams',
+                    'Multiple question types (MCQ, Essay, True/False, Fill in Blank)',
+                    'Bulk question upload via CSV/TXT',
+                    'Automated grading and results',
+                    'Real-time exam timer',
+                    'Password-protected exams',
+                    'Exam scheduling with due dates',
+                    'Network-based multi-computer support'
+                ],
+                technologies: 'HTML, CSS, JavaScript, Python, JSON'
+            },
+            'school-accounting': {
+                title: 'School Accounting System - Professional Edition',
+                description: '🏫 Transform your school\'s fee management from chaos to clarity in 30 minutes - No technical skills required! Stop answering "How much do I owe?" calls. Our cloud-based system automates everything from student registration to payment tracking to receipt generation.',
+                features: [
+                    '💰 Save 20+ hours per week on fee management',
+                    '📉 Reduce outstanding fees by 40% with parent transparency',
+                    '👨‍👩‍👧‍👦 Parent Portal - Parents check balances 24/7 on their phones',
+                    '✅ Zero calculation errors - Automatic calculations',
+                    '📊 Professional reports generated in seconds',
+                    '🔐 Secure cloud-based storage with automatic backups',
+                    '📱 Mobile-friendly - Works on all devices',
+                    '⚡ Setup in 30 minutes - No technical training needed',
+                    '💵 ROI in first term - System pays for itself',
+                    '🌐 Google Sheets backend - Free, reliable, always backed up'
+                ],
+                pricing: {
+                    basic: '₦50,000 - Up to 300 students',
+                    professional: '₦150,000 - Up to 1000 students',
+                    enterprise: '₦300,000 - Unlimited students',
+                    monthly: 'From ₦10,000/month'
+                },
+                benefits: [
+                    'Admin Portal - Complete fee management control',
+                    'Parent Portal - 24/7 balance checking via phone number',
+                    'Student Registration - Auto-generated IDs',
+                    'Fee Structure Management - Flexible by term and class',
+                    'Payment Processing - Multiple payment methods',
+                    'Financial Reporting - Instant professional reports',
+                    'Multi-Admin Support - Role-based access control',
+                    'Term Management - Multiple academic terms',
+                    'Receipt Generation - Automatic receipt creation',
+                    'Real-time Sync - All users see updates instantly'
+                ],
+                testimonial: '"Before this system, we spent hours every week tracking payments manually. Now everything is automated, and parents can check their balances anytime. Outstanding fees reduced by 40% in the first term!" - Mrs. Adebayo, Bursar, Grace International School',
+                technologies: 'HTML5, JavaScript, Google Apps Script, Google Sheets, Cloud-Based'
+            },
+            'ecommerce': {
+                title: 'School Supplies E-Commerce',
+                description: 'Online marketplace for school supplies with modern shopping experience.',
+                features: [
+                    'Product catalog with categories',
+                    'Shopping cart functionality',
+                    'Order management',
+                    'Payment integration',
+                    'User accounts and order history',
+                    'Product search and filters',
+                    'Responsive design for all devices',
+                    'Admin dashboard for inventory'
+                ],
+                technologies: 'HTML, CSS, JavaScript, Responsive Design'
+            },
+            'school-website': {
+                title: 'School Information Portal',
+                description: 'Modern, responsive website for schools to showcase their identity and engage with community.',
+                features: [
+                    'Homepage with school information',
+                    'News and announcements',
+                    'Events calendar',
+                    'Photo gallery',
+                    'Staff directory',
+                    'Contact forms',
+                    'Parent portal access',
+                    'Mobile-responsive design'
+                ],
+                technologies: 'HTML, CSS, JavaScript, CMS Integration'
+            },
+            'lms': {
+                title: 'Learning Management System',
+                description: 'Full-featured platform for online learning and course management.',
+                features: [
+                    'Course creation and management',
+                    'Student enrollment system',
+                    'Video and document uploads',
+                    'Quizzes and assessments',
+                    'Progress tracking',
+                    'Discussion forums',
+                    'Certificates and badges',
+                    'Analytics dashboard'
+                ],
+                technologies: 'Modern Web Stack, Database, Video Streaming'
+            },
+            'attendance': {
+                title: 'Smart Attendance Tracker',
+                description: 'Automated attendance system with QR code technology for efficient tracking.',
+                features: [
+                    'QR code generation for students',
+                    'Quick scan attendance marking',
+                    'Real-time attendance reports',
+                    'Parent notifications',
+                    'Attendance analytics',
+                    'Export to Excel/PDF',
+                    'Mobile app support',
+                    'Offline mode capability'
+                ],
+                technologies: 'QR Code API, Real-time Database, Mobile-first Design'
+            }
+        };
+
+        function openModal(projectId) {
+            var project = projectDetails[projectId];
+            var modalBody = document.getElementById('modal-body');
+            
+            var html = '<h2>' + project.title + '</h2>';
+            html += '<p style="margin: 1rem 0; line-height: 1.8; font-size: 1.05rem;">' + project.description + '</p>';
+            
+            // Add pricing if available
+            if (project.pricing) {
+                html += '<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0;">';
+                html += '<h3 style="color: white; margin-bottom: 1rem;">💰 Pricing Options:</h3>';
+                html += '<p style="margin: 0.5rem 0;"><strong>Basic:</strong> ' + project.pricing.basic + '</p>';
+                html += '<p style="margin: 0.5rem 0;"><strong>Professional:</strong> ' + project.pricing.professional + '</p>';
+                html += '<p style="margin: 0.5rem 0;"><strong>Enterprise:</strong> ' + project.pricing.enterprise + '</p>';
+                html += '<p style="margin: 0.5rem 0;"><strong>Monthly:</strong> ' + project.pricing.monthly + '</p>';
+                html += '</div>';
+            }
+            
+            html += '<h3 style="color: #667eea; margin-top: 2rem;">✨ Key Features:</h3>';
+            html += '<ul style="margin: 1rem 0; line-height: 2;">';
+            project.features.forEach(function(feature) {
+                html += '<li>' + feature + '</li>';
+            });
+            html += '</ul>';
+            
+            // Add benefits if available
+            if (project.benefits) {
+                html += '<h3 style="color: #667eea; margin-top: 2rem;">🎯 What You Get:</h3>';
+                html += '<ul style="margin: 1rem 0; line-height: 2;">';
+                project.benefits.forEach(function(benefit) {
+                    html += '<li>' + benefit + '</li>';
+                });
+                html += '</ul>';
+            }
+            
+            // Add testimonial if available
+            if (project.testimonial) {
+                html += '<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #28a745;">';
+                html += '<p style="font-style: italic; margin: 0; line-height: 1.8;">' + project.testimonial + '</p>';
+                html += '</div>';
+            }
+            
+            html += '<h3 style="color: #667eea; margin-top: 2rem;">🛠️ Technologies Used:</h3>';
+            html += '<p style="margin: 1rem 0;">' + project.technologies + '</p>';
+            html += '<button class="cta-button" style="margin-top: 2rem;" onclick="closeModal(); scrollToSection(\'booking\');">📞 Book This Project Now</button>';
+            
+            modalBody.innerHTML = html;
+            document.getElementById('project-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('project-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+    </script>
+</body>
+</html>
