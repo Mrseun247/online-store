@@ -850,19 +850,11 @@
             // Collect form data
             const formData = new FormData(this);
             
-            // Add uploaded files
-            if (uploadedFiles.logo) {
-                formData.append('logoFile', uploadedFiles.logo);
-            }
-            uploadedFiles.products.forEach((file, index) => {
-                formData.append(`productFile${index}`, file);
-            });
-            
-            // Convert to object for display
+            // Convert to object
             const data = {};
             for (let [key, value] of formData.entries()) {
                 if (value instanceof File) {
-                    data[key] = `File: ${value.name} (${(value.size / 1024).toFixed(2)} KB)`;
+                    continue; // Skip files, we'll handle them separately
                 } else {
                     if (data[key]) {
                         if (Array.isArray(data[key])) {
@@ -875,6 +867,31 @@
                     }
                 }
             }
+            
+            // Convert uploaded files to base64
+            const files = {
+                logo: null,
+                products: []
+            };
+            
+            if (uploadedFiles.logo) {
+                files.logo = {
+                    name: uploadedFiles.logo.name,
+                    type: uploadedFiles.logo.type,
+                    data: await fileToBase64(uploadedFiles.logo)
+                };
+            }
+            
+            for (let file of uploadedFiles.products) {
+                files.products.push({
+                    name: file.name,
+                    type: file.type,
+                    data: await fileToBase64(file)
+                });
+            }
+            
+            // Add files to data
+            data.files = files;
             
             // Log to console
             console.log('Client Form Data:', data);
@@ -889,31 +906,33 @@
                 
                 const response = await fetch(scriptURL, {
                     method: 'POST',
-                    body: formData
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
                 });
                 
-                const result = await response.json();
+                // Note: no-cors mode doesn't allow reading response
+                // So we assume success if no error is thrown
                 
-                if (result.status === 'success') {
-                    // Show success message
-                    document.getElementById('successMessage').classList.add('active');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    
-                    // Reset form and files
-                    this.reset();
-                    uploadedFiles = { logo: null, products: [] };
-                    document.getElementById('logoPreview').innerHTML = '';
-                    document.getElementById('productPreview').innerHTML = '';
-                    document.getElementById('logoUploadSection').style.display = 'none';
-                    document.getElementById('productUploadSection').style.display = 'none';
-                    
-                    // Hide success message after 5 seconds
-                    setTimeout(() => {
-                        document.getElementById('successMessage').classList.remove('active');
-                    }, 5000);
-                } else {
-                    alert('Error submitting form: ' + result.message + '\n\nPlease try again or contact us directly.');
-                }
+                // Show success message
+                document.getElementById('successMessage').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Reset form and files
+                this.reset();
+                uploadedFiles = { logo: null, products: [] };
+                document.getElementById('logoPreview').innerHTML = '';
+                document.getElementById('productPreview').innerHTML = '';
+                document.getElementById('logoUploadSection').style.display = 'none';
+                document.getElementById('productUploadSection').style.display = 'none';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.remove('active');
+                }, 5000);
+                
             } catch (error) {
                 console.error('Submission Error:', error);
                 alert('Error submitting form. Please check your internet connection and try again.\n\nIf the problem persists, please contact us directly.');
@@ -923,6 +942,19 @@
                 submitBtn.disabled = false;
             }
         });
+        
+        // Helper function to convert file to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const base64 = reader.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
     </script>
 </body>
 </html>
