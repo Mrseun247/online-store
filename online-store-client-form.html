@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store - Client Information Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .required {
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .helper-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #c3e6cb;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .file-upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .file-upload-area:hover {
+            background: #f8f9ff;
+            border-color: #764ba2;
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .file-upload-area p {
+            margin: 5px 0;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .file-preview {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .preview-item .remove-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .preview-item .file-name {
+            padding: 8px;
+            background: #f8f9fa;
+            font-size: 0.85rem;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 Online Store Development</h1>
+        <p class="subtitle">Please fill out this form with as much detail as possible to help us build your perfect online store</p>
+
+        <div class="success-message" id="successMessage">
+            ✅ Form submitted successfully! We'll review your information and get back to you soon.
+        </div>
+
+        <form id="clientForm">
+            <!-- Business Information -->
+            <div class="section">
+                <h2 class="section-title">📋 Business Information</h2>
+                
+                <div class="form-group">
+                    <label>Business/Store Name <span class="required">*</span></label>
+                    <input type="text" name="businessName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Full Name <span class="required">*</span></label>
+                    <input type="text" name="ownerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Business Address</label>
+                    <textarea name="businessAddress"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Tell us about your business <span class="required">*</span></label>
+                    <textarea name="businessDescription" required placeholder="What products do you sell? Who are your customers? What makes your business unique?"></textarea>
+                </div>
+            </div>
+
+            <!-- Domain & Hosting -->
+            <div class="section">
+                <h2 class="section-title">🌐 Domain & Hosting</h2>
+                
+                <div class="form-group">
+                    <label>Preferred Domain Name <span class="required">*</span></label>
+                    <input type="text" name="domainName" required placeholder="e.g., mystore.com">
+                    <p class="helper-text">We'll check availability and suggest alternatives if needed</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you already own this domain?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="domainOwnership" value="yes" id="domainYes">
+                            <label for="domainYes">Yes, I own it</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="domainOwnership" value="no" id="domainNo" checked>
+                            <label for="domainNo">No, please help me register it</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Hosting Preference</label>
+                    <select name="hostingPreference">
+                        <option value="help">Help me choose</option>
+                        <option value="shared">Shared Hosting (Budget-friendly)</option>
+                        <option value="vps">VPS Hosting (More power)</option>
+                        <option value="cloud">Cloud Hosting (Scalable)</option>
+                        <option value="own">I have my own hosting</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Store Design -->
+            <div class="section">
+                <h2 class="section-title">🎨 Design Preferences</h2>
+                
+                <div class="form-group">
+                    <label>Preferred Color Scheme</label>
+                    <input type="text" name="colorScheme" placeholder="e.g., Blue and white, Red and black, Modern pastels">
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have a logo?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="hasLogo" value="yes" id="logoYes" onchange="toggleLogoUpload(true)">
+                            <label for="logoYes">Yes, I have a logo</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="hasLogo" value="no" id="logoNo" onchange="toggleLogoUpload(false)">
+                            <label for="logoNo">No, I need a logo designed</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="logoUploadSection" style="display: none;">
+                    <label>Upload Your Logo</label>
+                    <div class="file-upload-area" onclick="document.getElementById('logoFile').click()">
+                        <div class="upload-icon">📁</div>
+                        <p>Click to upload logo</p>
+                        <p class="helper-text">PNG, JPG, or SVG (Max 5MB)</p>
+                    </div>
+                    <input type="file" id="logoFile" name="logoFile" accept="image/*" style="display: none;" onchange="handleFileSelect(this, 'logoPreview')">
+                    <div id="logoPreview" class="file-preview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Reference Websites</label>
+                    <textarea name="referenceWebsites" placeholder="List any websites you like the design of (e.g., www.example.com, www.anotherstore.com)"></textarea>
+                    <p class="helper-text">This helps us understand your style preferences</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Design Style Preference</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="designStyle" value="modern" id="modern">
+                            <label for="modern">Modern & Minimalist</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="designStyle" value="colorful" id="colorful">
+                            <label for="colorful">Colorful & Vibrant</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="designStyle" value="elegant" id="elegant">
+                            <label for="elegant">Elegant & Professional</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="designStyle" value="playful" id="playful">
+                            <label for="playful">Playful & Fun</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Information -->
+            <div class="section">
+                <h2 class="section-title">📦 Products Information</h2>
+                
+                <div class="form-group">
+                    <label>What type of products will you sell? <span class="required">*</span></label>
+                    <select name="productType" required>
+                        <option value="">Select...</option>
+                        <option value="physical">Physical Products (shipped items)</option>
+                        <option value="digital">Digital Products (downloads)</option>
+                        <option value="both">Both Physical and Digital</option>
+                        <option value="services">Services</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>How many products do you plan to sell initially? <span class="required">*</span></label>
+                    <select name="productCount" required>
+                        <option value="">Select...</option>
+                        <option value="1-10">1-10 products</option>
+                        <option value="11-50">11-50 products</option>
+                        <option value="51-100">51-100 products</option>
+                        <option value="100+">More than 100 products</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Product Categories</label>
+                    <textarea name="productCategories" placeholder="List your main product categories (e.g., Electronics, Clothing, Books, etc.)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have product images ready?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="hasImages" value="yes" id="imagesYes" onchange="toggleProductUpload(true)">
+                            <label for="imagesYes">Yes, I have professional images</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="hasImages" value="some" id="imagesSome" onchange="toggleProductUpload(true)">
+                            <label for="imagesSome">I have some images</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="hasImages" value="no" id="imagesNo" onchange="toggleProductUpload(false)">
+                            <label for="imagesNo">No, I need help with product photography</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="productUploadSection" style="display: none;">
+                    <label>Upload Sample Product Images</label>
+                    <div class="file-upload-area" onclick="document.getElementById('productFiles').click()">
+                        <div class="upload-icon">🖼️</div>
+                        <p>Click to upload product images</p>
+                        <p class="helper-text">Upload 3-10 sample images (PNG, JPG - Max 5MB each)</p>
+                    </div>
+                    <input type="file" id="productFiles" name="productFiles" accept="image/*" multiple style="display: none;" onchange="handleMultipleFiles(this, 'productPreview')">
+                    <div id="productPreview" class="file-preview"></div>
+                </div>
+            </div>
+
+            <!-- Payment Options -->
+            <div class="section">
+                <h2 class="section-title">💳 Payment Options</h2>
+                
+                <div class="form-group">
+                    <label>Which payment methods do you want to accept? <span class="required">*</span></label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="paymentMethods" value="paystack" id="paystack">
+                            <label for="paystack">Paystack (Cards, Bank Transfer, USSD)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="paymentMethods" value="flutterwave" id="flutterwave">
+                            <label for="flutterwave">Flutterwave (Cards, Mobile Money)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="paymentMethods" value="paypal" id="paypal">
+                            <label for="paypal">PayPal (International payments)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="paymentMethods" value="stripe" id="stripe">
+                            <label for="stripe">Stripe (International cards)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="paymentMethods" value="bank" id="bank">
+                            <label for="bank">Direct Bank Transfer</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="paymentMethods" value="cod" id="cod">
+                            <label for="cod">Cash on Delivery</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have existing payment gateway accounts?</label>
+                    <textarea name="existingPaymentAccounts" placeholder="e.g., I have a Paystack account, Need help setting up Flutterwave"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Currency <span class="required">*</span></label>
+                    <select name="currency" required>
+                        <option value="NGN">Nigerian Naira (₦)</option>
+                        <option value="USD">US Dollar ($)</option>
+                        <option value="GBP">British Pound (£)</option>
+                        <option value="EUR">Euro (€)</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Shipping & Delivery -->
+            <div class="section">
+                <h2 class="section-title">🚚 Shipping & Delivery</h2>
+                
+                <div class="form-group">
+                    <label>Do you need shipping/delivery features?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="needsShipping" value="yes" id="shippingYes">
+                            <label for="shippingYes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="needsShipping" value="no" id="shippingNo">
+                            <label for="shippingNo">No (Digital products or pickup only)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Shipping Coverage</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="shippingCoverage" value="local" id="local">
+                            <label for="local">Local/City delivery</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="shippingCoverage" value="nationwide" id="nationwide">
+                            <label for="nationwide">Nationwide delivery</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="shippingCoverage" value="international" id="international">
+                            <label for="international">International shipping</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Shipping Method</label>
+                    <textarea name="shippingMethod" placeholder="e.g., Own delivery team, DHL, FedEx, GIG Logistics, etc."></textarea>
+                </div>
+            </div>
+
+            <!-- Features & Functionality -->
+            <div class="section">
+                <h2 class="section-title">⚙️ Features & Functionality</h2>
+                
+                <div class="form-group">
+                    <label>Which features do you need?</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="search" id="search" checked>
+                            <label for="search">Product Search</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="wishlist" id="wishlist">
+                            <label for="wishlist">Wishlist/Favorites</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="reviews" id="reviews">
+                            <label for="reviews">Customer Reviews & Ratings</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="newsletter" id="newsletter">
+                            <label for="newsletter">Newsletter Subscription</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="blog" id="blog">
+                            <label for="blog">Blog Section</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="chat" id="chat">
+                            <label for="chat">Live Chat Support</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="discount" id="discount">
+                            <label for="discount">Discount Codes/Coupons</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="inventory" id="inventory">
+                            <label for="inventory">Inventory Management</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="analytics" id="analytics">
+                            <label for="analytics">Sales Analytics Dashboard</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Customer Account Features</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="accountFeatures" value="registration" id="registration" checked>
+                            <label for="registration">Customer Registration/Login</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="accountFeatures" value="orderHistory" id="orderHistory" checked>
+                            <label for="orderHistory">Order History</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="accountFeatures" value="tracking" id="tracking">
+                            <label for="tracking">Order Tracking</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media & Marketing -->
+            <div class="section">
+                <h2 class="section-title">📱 Social Media & Marketing</h2>
+                
+                <div class="form-group">
+                    <label>Facebook Page URL</label>
+                    <input type="url" name="facebook" placeholder="https://facebook.com/yourpage">
+                </div>
+
+                <div class="form-group">
+                    <label>Instagram Handle</label>
+                    <input type="text" name="instagram" placeholder="@yourbusiness">
+                </div>
+
+                <div class="form-group">
+                    <label>Twitter/X Handle</label>
+                    <input type="text" name="twitter" placeholder="@yourbusiness">
+                </div>
+
+                <div class="form-group">
+                    <label>WhatsApp Business Number</label>
+                    <input type="tel" name="whatsapp" placeholder="+234 XXX XXX XXXX">
+                </div>
+
+                <div class="form-group">
+                    <label>Do you need email marketing integration?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="emailMarketing" value="yes" id="emailYes">
+                            <label for="emailYes">Yes (Mailchimp, SendGrid, etc.)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="emailMarketing" value="no" id="emailNo">
+                            <label for="emailNo">No, not now</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget & Timeline -->
+            <div class="section">
+                <h2 class="section-title">💰 Budget & Timeline</h2>
+                
+                <div class="form-group">
+                    <label>Budget Range <span class="required">*</span></label>
+                    <select name="budget" required>
+                        <option value="">Select...</option>
+                        <option value="100-150k">₦100,000 - ₦150,000</option>
+                        <option value="150-200k">₦150,000 - ₦200,000</option>
+                        <option value="200-500k">₦200,000 - ₦500,000</option>
+                        <option value="500k+">₦500,000+</option>
+                        <option value="discuss">Let's discuss</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>When do you need the store ready? <span class="required">*</span></label>
+                    <select name="timeline" required>
+                        <option value="">Select...</option>
+                        <option value="urgent">ASAP (1-2 weeks)</option>
+                        <option value="1month">Within 1 month</option>
+                        <option value="2months">1-2 months</option>
+                        <option value="flexible">Flexible timeline</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="section">
+                <h2 class="section-title">📝 Additional Information</h2>
+                
+                <div class="form-group">
+                    <label>Any specific requirements or features not mentioned above?</label>
+                    <textarea name="additionalRequirements" placeholder="Tell us anything else that's important for your online store"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>How did you hear about us?</label>
+                    <select name="referralSource">
+                        <option value="">Select...</option>
+                        <option value="google">Google Search</option>
+                        <option value="social">Social Media</option>
+                        <option value="referral">Friend/Colleague Referral</option>
+                        <option value="portfolio">Saw your portfolio</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Information 🚀</button>
+        </form>
+    </div>
+
+    <script>
+        // Store uploaded files
+        let uploadedFiles = {
+            logo: null,
+            products: []
+        };
+
+        // Toggle logo upload section
+        function toggleLogoUpload(show) {
+            document.getElementById('logoUploadSection').style.display = show ? 'block' : 'none';
+        }
+
+        // Toggle product upload section
+        function toggleProductUpload(show) {
+            document.getElementById('productUploadSection').style.display = show ? 'block' : 'none';
+        }
+
+        // Handle single file selection (logo)
+        function handleFileSelect(input, previewId) {
+            const file = input.files[0];
+            if (!file) return;
+
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB');
+                input.value = '';
+                return;
+            }
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                alert('Please upload an image file');
+                input.value = '';
+                return;
+            }
+
+            uploadedFiles.logo = file;
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById(previewId);
+                preview.innerHTML = `
+                    <div class="preview-item">
+                        <img src="${e.target.result}" alt="Logo preview">
+                        <button type="button" class="remove-btn" onclick="removeLogo()">×</button>
+                        <div class="file-name">${file.name}</div>
+                    </div>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Handle multiple file selection (products)
+        function handleMultipleFiles(input, previewId) {
+            const files = Array.from(input.files);
+            
+            // Validate number of files
+            if (files.length > 10) {
+                alert('Please upload maximum 10 images');
+                input.value = '';
+                return;
+            }
+
+            // Validate each file
+            for (let file of files) {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert(`${file.name} is too large. Max size is 5MB`);
+                    input.value = '';
+                    return;
+                }
+                if (!file.type.startsWith('image/')) {
+                    alert(`${file.name} is not an image file`);
+                    input.value = '';
+                    return;
+                }
+            }
+
+            uploadedFiles.products = files;
+
+            // Show previews
+            const preview = document.getElementById(previewId);
+            preview.innerHTML = '';
+
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Product ${index + 1}">
+                        <button type="button" class="remove-btn" onclick="removeProductImage(${index})">×</button>
+                        <div class="file-name">${file.name}</div>
+                    `;
+                    preview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Remove logo
+        function removeLogo() {
+            uploadedFiles.logo = null;
+            document.getElementById('logoFile').value = '';
+            document.getElementById('logoPreview').innerHTML = '';
+        }
+
+        // Remove product image
+        function removeProductImage(index) {
+            uploadedFiles.products.splice(index, 1);
+            
+            // Update file input
+            const dt = new DataTransfer();
+            uploadedFiles.products.forEach(file => dt.items.add(file));
+            document.getElementById('productFiles').files = dt.files;
+            
+            // Refresh preview
+            handleMultipleFiles(document.getElementById('productFiles'), 'productPreview');
+        }
+
+        // Form submission
+        document.getElementById('clientForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting... Please wait';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = new FormData(this);
+            
+            // Add uploaded files
+            if (uploadedFiles.logo) {
+                formData.append('logoFile', uploadedFiles.logo);
+            }
+            uploadedFiles.products.forEach((file, index) => {
+                formData.append(`productFile${index}`, file);
+            });
+            
+            // Convert to object for display
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                if (value instanceof File) {
+                    data[key] = `File: ${value.name} (${(value.size / 1024).toFixed(2)} KB)`;
+                } else {
+                    if (data[key]) {
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+            }
+            
+            // Log to console
+            console.log('Client Form Data:', data);
+            console.log('Uploaded Files:', {
+                logo: uploadedFiles.logo?.name,
+                products: uploadedFiles.products.map(f => f.name)
+            });
+            
+            // In production, send formData to your backend
+            // Example: await fetch('YOUR_API_URL', { method: 'POST', body: formData });
+            
+            // Simulate upload delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Show success message
+            document.getElementById('successMessage').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Reset form and files
+            this.reset();
+            uploadedFiles = { logo: null, products: [] };
+            document.getElementById('logoPreview').innerHTML = '';
+            document.getElementById('productPreview').innerHTML = '';
+            document.getElementById('logoUploadSection').style.display = 'none';
+            document.getElementById('productUploadSection').style.display = 'none';
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('active');
+            }, 5000);
+            
+            // Restore button
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+    </script>
+</body>
+</html>
