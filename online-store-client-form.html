@@ -883,32 +883,45 @@
                 products: uploadedFiles.products.map(f => f.name)
             });
             
-            // In production, send formData to your backend
-            // Example: await fetch('YOUR_API_URL', { method: 'POST', body: formData });
-            
-            // Simulate upload delay
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // Show success message
-            document.getElementById('successMessage').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Reset form and files
-            this.reset();
-            uploadedFiles = { logo: null, products: [] };
-            document.getElementById('logoPreview').innerHTML = '';
-            document.getElementById('productPreview').innerHTML = '';
-            document.getElementById('logoUploadSection').style.display = 'none';
-            document.getElementById('productUploadSection').style.display = 'none';
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.remove('active');
-            }, 5000);
-            
-            // Restore button
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            try {
+                // Send to Google Sheets
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbwhx6pfsGxadJpTMb7yxqk_H1aDPLVs916vXF-4FmY3OXREd-vhoRJYNhRcpoZz2sVJpQ/exec';
+                
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    // Show success message
+                    document.getElementById('successMessage').classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Reset form and files
+                    this.reset();
+                    uploadedFiles = { logo: null, products: [] };
+                    document.getElementById('logoPreview').innerHTML = '';
+                    document.getElementById('productPreview').innerHTML = '';
+                    document.getElementById('logoUploadSection').style.display = 'none';
+                    document.getElementById('productUploadSection').style.display = 'none';
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('successMessage').classList.remove('active');
+                    }, 5000);
+                } else {
+                    alert('Error submitting form: ' + result.message + '\n\nPlease try again or contact us directly.');
+                }
+            } catch (error) {
+                console.error('Submission Error:', error);
+                alert('Error submitting form. Please check your internet connection and try again.\n\nIf the problem persists, please contact us directly.');
+            } finally {
+                // Restore button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     </script>
 </body>
